@@ -7,11 +7,11 @@ import User from "./users/user.model.js";
 
 const models = {
   albums: Album,
-  comments: Comment,
-  photos: Photo,
-  posts: Post,
-  todos: Todo,
-  users: User,
+  // comments: Comment,
+  // photos: Photo,
+  // posts: Post,
+  // todos: Todo,
+  // users: User,
 };
 
 export default models;

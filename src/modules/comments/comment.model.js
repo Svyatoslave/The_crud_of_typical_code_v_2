@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const comment = new mongoose.Schema({
-  postId: { type: String, required: true },
-  id: { type: String, required: true },
+  postId: { type: Number, required: true },
+  id: { type: mongoose.Schema.Types.ObjectId },
   name: { type: String, required: true },
   email: { type: String, required: true },
   body: { type: String, required: true },

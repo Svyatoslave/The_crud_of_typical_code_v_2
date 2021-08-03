@@ -14,6 +14,7 @@ async function bootstrap() {
     await mongoose.connect(DB_URL, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
+      autoIndex: false,
     });
     await initialize();
     console.log("initializebd - complete");

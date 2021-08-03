@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const todo = new mongoose.Schema({
-  userId: { type: String, required: true },
-  id: { type: String, required: true },
+  userId: { type: Number, required: true },
+  id: { type: Number, required: true },
   title: { type: String, required: true },
   completed: { type: Boolean, required: true },
 });
