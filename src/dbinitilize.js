@@ -1,5 +1,4 @@
 import axios from "axios";
-import mongoose from "mongoose";
 import models from "./modules/allmodules.js";
 
 const getUrl = (str) => `https://jsonplaceholder.typicode.com/${str}`;
