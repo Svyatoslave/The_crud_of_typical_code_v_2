@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import User from "../users/user.model.js";
 
 const album = new mongoose.Schema({
   _id: { type: Number, required: true },

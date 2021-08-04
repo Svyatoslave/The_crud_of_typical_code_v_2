@@ -1,18 +1,18 @@
 import Comment from "./comment.model.js";
 
 class CommentService {
+  async getAll() {
+    const comments = await Comment.find().populate("postId").exec();
+
+    return comments;
+  }
+
   async create(comment) {
     const createdComment = await Comment.create({
       ...comment,
     });
 
     return createdComment;
-  }
-
-  async getAll() {
-    const comments = await Comment.find();
-
-    return comments;
   }
 
   async getOne(id) {

@@ -2,15 +2,13 @@ import Album from "./album.model.js";
 
 class AlbumService {
   async getAll() {
-    const albums = await Album.find();
+    const albums = await Album.find().populate("userId").exec();
 
     return albums;
   }
 
   async create(album) {
-    const createdAlbum = await Album.create({
-      ...album,
-    });
+    const createdAlbum = await Album.create({ ...album, user: userId });
 
     return createdAlbum;
   }
