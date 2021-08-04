@@ -6,12 +6,12 @@ import Todo from "./todos/todo.model.js";
 import User from "./users/user.model.js";
 
 const models = {
+  users: User,
+  posts: Post,
   albums: Album,
-  // comments: Comment,
-  // photos: Photo,
-  // posts: Post,
-  // todos: Todo,
-  // users: User,
+  comments: Comment,
+  photos: Photo,
+  todos: Todo,
 };
 
 export default models;

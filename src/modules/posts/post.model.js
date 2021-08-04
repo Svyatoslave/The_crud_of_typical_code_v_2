@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import User from "../users/user.model.js";
 
 const post = new mongoose.Schema({
-  userId: { type: Number, required: true },
-  id: { type: Number, required: true },
+  _id: { type: Number, required: true },
+  userId: { type: mongoose.Schema.Types.Number, ref: "User" },
   title: { type: String, required: true },
   body: { type: String, required: true },
 });
