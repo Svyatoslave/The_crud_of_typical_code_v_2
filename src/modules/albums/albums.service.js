@@ -1,14 +1,15 @@
 import Album from "./album.model.js";
+import PhotoService from "../photos/photos.service.js";
 
 class AlbumService {
   async getAll() {
-    const albums = await Album.find().populate("userId").exec();
+    const albums = await Album.find();
 
     return albums;
   }
 
-  async create(album) {
-    const createdAlbum = await Album.create({ ...album, user: userId });
+  async create(album, id) {
+    const createdAlbum = await Album.create({ ...album, _id: id });
 
     return createdAlbum;
   }
@@ -17,7 +18,7 @@ class AlbumService {
     if (!id) {
       throw new Error("ID not request");
     }
-    const album = await Album.findById(id);
+    const album = await Album.findById(id).populate("user").exec();
 
     return album;
   }
@@ -41,7 +42,13 @@ class AlbumService {
 
     const album = await Album.findByIdAndDelete(id);
 
-    return album;
+    await PhotoService.removePhotos(id);
+  }
+  async removeAlbums(id) {
+    const data = await Album.find({ user: id });
+    for (let { id, ...item } of data) {
+      this.delete(id);
+    }
   }
 }
 

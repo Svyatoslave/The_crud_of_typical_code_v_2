@@ -1,16 +1,16 @@
 import Photo from "./photo.model.js";
 
 class PhotoService {
-  async create(photo) {
+  async create(photo, id) {
     const createdPhoto = await Photo.create({
       ...photo,
+      _id: id,
     });
     return createdPhoto;
   }
 
   async getAll() {
     const photos = await Photo.find();
-
     return photos;
   }
 
@@ -18,8 +18,7 @@ class PhotoService {
     if (!id) {
       throw new Error("ID not request");
     }
-
-    const photo = await Photo.findById(id);
+    const photo = await Photo.findById(id).populate("album").exec();
 
     return photo;
   }
@@ -42,8 +41,10 @@ class PhotoService {
     }
 
     const photo = await Photo.findByIdAndDelete(id);
-
-    return photo;
+    await AlbumService.removeAlbums(id);
+  }
+  async removePhotos(id) {
+    await Photo.remove({ album: id });
   }
 }
 

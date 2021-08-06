@@ -1,15 +1,17 @@
 import Todo from "./todo.model.js";
 
 class TodoService {
-  async create(todo) {
+  async create(todo, id) {
     const createdTodo = await Todo.create({
       ...todo,
+      _id: id,
     });
     return createdTodo;
   }
 
   async getAll() {
-    const todos = await Todo.find();
+    const todos = await todo.find().populate("userId").exec();
+
     return todos;
   }
 
@@ -17,8 +19,7 @@ class TodoService {
     if (!id) {
       throw new Error("ID not request");
     }
-
-    const todo = await Todo.findById(id);
+    const todo = await Todo.findById(id).populate("user").exec();
 
     return todo;
   }
@@ -43,6 +44,9 @@ class TodoService {
     const todo = await Todo.findByIdAndDelete(id);
 
     return todo;
+  }
+  async removeTodos(id) {
+    await Todo.remove({ user: id });
   }
 }
 

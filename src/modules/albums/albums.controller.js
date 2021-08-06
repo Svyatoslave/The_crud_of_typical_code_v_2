@@ -3,7 +3,7 @@ import AlbumService from "./albums.service.js";
 class albumsController {
   async create(req, res) {
     try {
-      const album = await AlbumService.create(req.body);
+      const album = await AlbumService.create(req.body, req.body.id);
       res.status(200).json(album);
     } catch (err) {
       res.status(500).json(err);
@@ -44,7 +44,7 @@ class albumsController {
     try {
       const album = await AlbumService.delete(req.params.id);
 
-      return res.json(album);
+      return res.json(true);
     } catch (err) {
       res.status(500).json(err);
     }

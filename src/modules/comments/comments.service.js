@@ -2,14 +2,15 @@ import Comment from "./comment.model.js";
 
 class CommentService {
   async getAll() {
-    const comments = await Comment.find().populate("postId").exec();
+    const comments = await Comment.find();
 
     return comments;
   }
 
-  async create(comment) {
+  async create(comment, id) {
     const createdComment = await Comment.create({
       ...comment,
+      _id: id,
     });
 
     return createdComment;
@@ -20,7 +21,7 @@ class CommentService {
       throw new Error("ID not request");
     }
 
-    const comment = await Comment.findById(id);
+    const comment = await Comment.find().populate("post").exec();
 
     return comment;
   }
@@ -49,6 +50,9 @@ class CommentService {
     const comment = await Comment.findByIdAndDelete(id);
 
     return comment;
+  }
+  async removeComments(id) {
+    await Comment.remove({ post: id });
   }
 }
 

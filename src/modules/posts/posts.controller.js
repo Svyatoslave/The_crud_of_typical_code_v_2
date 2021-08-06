@@ -3,7 +3,7 @@ import PostService from "./posts.service.js";
 class postsController {
   async create(req, res) {
     try {
-      const post = await PostService.create(req.body);
+      const post = await PostService.create(req.body, req.body.id);
       res.status(200).json(post);
     } catch (err) {
       res.status(500).json(err);
@@ -44,7 +44,7 @@ class postsController {
     try {
       const post = await PostService.delete(req.params.id);
 
-      return res.json(post);
+      return res.json(true);
     } catch (err) {
       res.status(500).json(err);
     }

@@ -1,14 +1,17 @@
 import Post from "./post.model.js";
+import CommentService from "../comments/comments.service.js";
 
 class PostService {
-  async create(post) {
-    const createdPost = await Post.create({ ...post });
-
+  async create(post, id) {
+    const createdPost = await Post.create({
+      ...post,
+      _id: id,
+    });
     return createdPost;
   }
 
   async getAll() {
-    const posts = await Post.find();
+    const posts = await Post.find().populate("userId").exec();
 
     return posts;
   }
@@ -17,7 +20,7 @@ class PostService {
     if (!id) {
       throw new Error("ID not request");
     }
-
+    const createdPost = await Post.create({ ...post });
     const post = await Post.findById(id);
 
     return post;
@@ -40,9 +43,15 @@ class PostService {
       throw new Error("ID not request");
     }
 
-    const post = await Post.findByIdAndDelete(id);
+    await Post.findByIdAndDelete(id);
+    await CommentService.removeComments(id);
+  }
 
-    return post;
+  async removePosts(id) {
+    const data = await Post.find({ user: id });
+    for (let { id, ...item } of data) {
+      this.delete(id);
+    }
   }
 }
 

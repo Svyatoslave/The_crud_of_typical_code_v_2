@@ -3,7 +3,7 @@ import UserService from "./users.service.js";
 class usersController {
   async create(req, res) {
     try {
-      const user = await UserService.create(req.body);
+      const user = await UserService.create(req.body, req.body.id);
       res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
@@ -44,7 +44,7 @@ class usersController {
     try {
       const user = await UserService.delete(req.params.id);
 
-      return res.json(user);
+      return res.json(true);
     } catch (err) {
       res.status(500).json(err);
     }

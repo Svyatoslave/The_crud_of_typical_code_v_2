@@ -3,7 +3,7 @@ import TodoService from "./todos.service.js";
 class todosController {
   async create(req, res) {
     try {
-      const todo = await TodoService.create(req.body);
+      const todo = await TodoService.create(req.body, req.body.id);
       res.status(200).json(todo);
     } catch (err) {
       res.status(500).json(err);
@@ -44,7 +44,7 @@ class todosController {
     try {
       const todo = await TodoService.delete(req.params.id);
 
-      return res.json(todo);
+      return res.json(true);
     } catch (err) {
       res.status(500).json(err);
     }

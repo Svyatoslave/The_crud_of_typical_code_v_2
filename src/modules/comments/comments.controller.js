@@ -1,9 +1,9 @@
-import CommentService from "./сomments.service.js";
+import CommentService from "./comments.service.js";
 
 class commentsController {
   async create(req, res) {
     try {
-      const comment = await CommentService.create(req.body);
+      const comment = await CommentService.create(req.body, req.body.id);
       res.status(200).json(comment);
     } catch (err) {
       res.status(500).json(err);
@@ -44,7 +44,7 @@ class commentsController {
     try {
       const comment = await CommentService.delete(req.params.id);
 
-      return res.json(comment);
+      return res.json(true);
     } catch (err) {
       res.status(500).json(err);
     }

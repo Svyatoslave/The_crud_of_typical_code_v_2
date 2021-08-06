@@ -3,7 +3,7 @@ import PhotoService from "./photos.service.js";
 class photosController {
   async create(req, res) {
     try {
-      const photo = await PhotoService.create(req.body);
+      const photo = await PhotoService.create(req.body, req.body.id);
       res.status(200).json(photo);
     } catch (err) {
       res.status(500).json(err);
@@ -43,7 +43,7 @@ class photosController {
     try {
       const photo = await PhotoService.delete(req.params.id);
 
-      return res.json(photo);
+      return res.json(true);
     } catch (err) {
       res.status(500).json(err);
     }

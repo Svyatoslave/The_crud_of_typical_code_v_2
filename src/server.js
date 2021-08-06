@@ -16,7 +16,7 @@ async function bootstrap() {
       useNewUrlParser: true,
       autoIndex: false,
     });
-    await initialize();
+    await initialize.initializeAll();
     console.log("initializebd - complete");
     app.listen(PORT, () => console.log("SERVER STARTED ON PORT " + PORT));
   } catch (e) {
