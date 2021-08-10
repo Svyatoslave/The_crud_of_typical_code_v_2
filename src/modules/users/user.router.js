@@ -1,9 +1,16 @@
 import Router from "express";
+
 import usersController from "./users.controller.js";
+import userValidationSchema from "./user.validationSchema.js";
+import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
 
 const usersRouter = new Router();
 
-usersRouter.post(`/users`, usersController.create);
+usersRouter.post(
+  `/users`,
+  validationMiddlewar(userValidationSchema),
+  usersController.create
+);
 usersRouter.get(`/users`, usersController.getAll);
 usersRouter.get(`/users/:id`, usersController.getOne);
 usersRouter.put(`/users/:id`, usersController.update);

@@ -1,9 +1,16 @@
 import Router from "express";
+
 import albumsController from "./albums.controller.js";
+import albumValidationSchema from "./album.validationSchema.js";
+import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
 
 const albumsRouter = new Router();
 
-albumsRouter.post(`/albums`, albumsController.create);
+albumsRouter.post(
+  `/albums`,
+  validationMiddlewar(albumValidationSchema),
+  albumsController.create
+);
 
 albumsRouter.get(`/albums`, albumsController.getAll);
 

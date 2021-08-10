@@ -2,10 +2,7 @@ import Photo from "./photo.model.js";
 
 class PhotoService {
   async create(photo, id) {
-    const createdPhoto = await Photo.create({
-      ...photo,
-      _id: id,
-    });
+    const createdPhoto = await Photo.create({ ...photo });
     return createdPhoto;
   }
 

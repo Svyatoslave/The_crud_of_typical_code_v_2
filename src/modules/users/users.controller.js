@@ -3,10 +3,10 @@ import UserService from "./users.service.js";
 class usersController {
   async create(req, res) {
     try {
-      const user = await UserService.create(req.body, req.body.id);
-      res.status(200).json(user);
+      const user = await UserService.create(req.body, req.body);
+      res.status(201).json(user);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 
@@ -14,9 +14,9 @@ class usersController {
     try {
       const users = await UserService.getAll();
 
-      return res.json(users);
+      return res.status(200).json(users);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 

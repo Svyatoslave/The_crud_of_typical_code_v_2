@@ -1,22 +1,16 @@
-import User from "./user.model.js";
+import { USER_NAME } from "./user.model.js";
 import TodoService from "../todos/todos.service.js";
 import PostService from "../posts/posts.service.js";
 import AlbumService from "../albums/albums.service.js";
-import { validation } from "../../common/validation.js";
-import { userSchema } from "../../common/validationSchem.js";
 
 class UserService {
-  async create(user, id) {
-    if (validation(userSchema, user) === true) {
-      const createdUser = await User.create({ ...user, _id: id });
-      return createdUser;
-    } else {
-      console.log("пользователь долбаеб🤣");
-    }
+  async create(user) {
+    const createdUser = await USER_NAME.create({ ...user });
+    return createdUser;
   }
 
   async getAll() {
-    const users = await User.find();
+    const users = await USER_NAME.find();
     return users;
   }
 
@@ -24,7 +18,7 @@ class UserService {
     if (!id) {
       throw new Error("ID not request");
     }
-    const user = await User.findById(id);
+    const user = await USER_NAME.findById(id);
     return user;
   }
 
@@ -32,7 +26,7 @@ class UserService {
     if (!user._id) {
       throw new Error("ID not request");
     }
-    const updatedUser = await User.findByIdAndUpdate(user._id, user, {
+    const updatedUser = await USER_NAME.findByIdAndUpdate(user._id, user, {
       new: true,
     });
     return updatedUser;
@@ -42,7 +36,7 @@ class UserService {
     if (!id) {
       throw new Error("ID not request");
     }
-    const user = await User.findByIdAndDelete(id);
+    const user = await USER_NAME.findByIdAndDelete(id);
     await AlbumService.removeAlbums(id);
     await PostService.removePosts(id);
     await TodoService.removeTodos(id);

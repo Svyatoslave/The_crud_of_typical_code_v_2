@@ -9,7 +9,7 @@ class AlbumService {
   }
 
   async create(album, id) {
-    const createdAlbum = await Album.create({ ...album, _id: id });
+    const createdAlbum = await Album.create({ ...album });
 
     return createdAlbum;
   }

@@ -3,10 +3,7 @@ import CommentService from "../comments/comments.service.js";
 
 class PostService {
   async create(post, id) {
-    const createdPost = await Post.create({
-      ...post,
-      _id: id,
-    });
+    const createdPost = await Post.create({ ...post });
     return createdPost;
   }
 

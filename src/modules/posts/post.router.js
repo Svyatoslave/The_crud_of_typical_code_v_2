@@ -1,9 +1,16 @@
 import Router from "express";
+
 import postsController from "./posts.controller.js";
+import postValidationSchema from "./post.validationSchema.js";
+import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
 
 const postsRouter = new Router();
 
-postsRouter.post(`/posts`, postsController.create);
+postsRouter.post(
+  `/posts`,
+  validationMiddlewar(postValidationSchema),
+  postsController.create
+);
 
 postsRouter.get(`/posts`, postsController.getAll);
 

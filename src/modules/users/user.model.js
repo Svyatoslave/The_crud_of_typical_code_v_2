@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
+import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
+
+const USER_NAME = "User";
 
 const user = new mongoose.Schema({
-  _id: { type: Number, required: true },
+  _id: { type: Number, required: false },
   name: { type: String, required: true },
   username: { type: String, required: true },
   email: { type: String, required: true },
@@ -23,4 +26,14 @@ const user = new mongoose.Schema({
     bs: { type: String, required: true },
   },
 });
-export default mongoose.model("User", user);
+
+autoIncrementModel(user, USER_NAME);
+
+// user.pre("deleteOne", (...args) => {
+//   console.log("Remove user");
+//   console.log(args);
+// });
+
+export { USER_NAME };
+
+export default mongoose.model(USER_NAME, user);

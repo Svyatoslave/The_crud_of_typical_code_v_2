@@ -11,16 +11,22 @@ routing(app);
 
 async function bootstrap() {
   try {
-    await mongoose.connect(DB_URL, {
+    const connection = await mongoose.connect(DB_URL, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       autoIndex: false,
     });
+
     await initialize.initializeAll();
-    console.log("initializebd - complete");
-    app.listen(PORT, () => console.log("SERVER STARTED ON PORT " + PORT));
-  } catch (e) {
-    console.log(e);
+
+    await app.listen(PORT);
+
+    console.log(
+      "\x1b[32m%s\x1b[0m",
+      `\n  SERVER STARTED ON PORT ${PORT} !!!\n`
+    );
+  } catch (err) {
+    console.error(err);
   }
 }
 

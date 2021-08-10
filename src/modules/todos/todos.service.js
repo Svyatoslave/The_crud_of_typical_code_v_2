@@ -1,11 +1,8 @@
 import Todo from "./todo.model.js";
 
 class TodoService {
-  async create(todo, id) {
-    const createdTodo = await Todo.create({
-      ...todo,
-      _id: id,
-    });
+  async create(todo) {
+    const createdTodo = await Todo.create({ ...todo });
     return createdTodo;
   }
 

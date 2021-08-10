@@ -8,10 +8,7 @@ class CommentService {
   }
 
   async create(comment, id) {
-    const createdComment = await Comment.create({
-      ...comment,
-      _id: id,
-    });
+    const createdComment = await Comment.create({ ...comment });
 
     return createdComment;
   }
