@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
-import { USER_NAME } from "../users/user.model.js";
 import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-
-const POST_NAME = "post";
+import { USER_NAME } from "../modelsName.js";
+import Comment from "../comments/comment.model.js";
 
 const post = new mongoose.Schema({
   _id: { type: Number, required: false },
@@ -12,8 +11,18 @@ const post = new mongoose.Schema({
   body: { type: String, required: true },
 });
 
-autoIncrementModel(post, POST_NAME);
+autoIncrementModel(post, "Post");
 
-export { POST_NAME };
+post.pre("deleteMany", async function (next) {
+  const { _conditions: document } = this;
+  await Comment.deleteMany({ user: document._id });
+  next();
+});
 
-export default mongoose.model(POST_NAME, post);
+post.pre("deleteOne", async function (next) {
+  const { _conditions: document } = this;
+  await Comment.deleteMany({ post: document._id });
+  next();
+});
+
+export default mongoose.model("Post", post);

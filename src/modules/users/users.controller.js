@@ -1,3 +1,4 @@
+import { resolveSoa } from "node:dns/promises";
 import UserService from "./users.service.js";
 
 class usersController {
@@ -23,6 +24,10 @@ class usersController {
   async getOne(req, res) {
     try {
       const user = await UserService.getOne(req.params.id);
+      if (!user)
+        return res
+          .status(404)
+          .json({ message: `User by id #${req.params.id} is not defined` });
 
       return res.json(user);
     } catch (err) {
@@ -32,7 +37,13 @@ class usersController {
 
   async update(req, res) {
     try {
-      const updatedUser = await UserService.update(req.body);
+      const existUser = await UserService.getOne(req.params.id);
+      if (!user)
+        return res
+          .status(404)
+          .json({ message: `User by id #${req.params.id} is not defined` });
+
+      const updatedUser = await UserService.update(req.body, req.params.id);
 
       return res.json(updatedUser);
     } catch (err) {
@@ -42,10 +53,17 @@ class usersController {
 
   async delete(req, res) {
     try {
-      const user = await UserService.delete(req.params.id);
+      const existUser = await UserService.getOne(req.params.id);
+      if (!existUser)
+        return res
+          .status(404)
+          .json({ message: `User by id #${req.params.id} is not defined` });
+
+      await UserService.delete(existUser);
 
       return res.json(true);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   }

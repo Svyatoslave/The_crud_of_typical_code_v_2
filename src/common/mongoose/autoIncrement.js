@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 function autoIncrementModel(model, name) {
   model.pre("save", async function (next) {
-    const element = this;
+    const self = this;
 
-    if (!element._id) {
+    if (!self._id) {
       const { _id: lastId } = await mongoose
         .model(name, model)
         .findOne({}, {}, { sort: { _id: -1 } });
-      element._id = lastId + 1;
+      self._id = lastId + 1;
     }
     next();
   });

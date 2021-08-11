@@ -1,17 +1,27 @@
 import mongoose from "mongoose";
 
 import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-
-const ALBUM_NAME = "album";
+import { USER_NAME } from "../modelsName.js";
+import Photo from "../photos/photo.model.js";
 
 const album = new mongoose.Schema({
   _id: { type: Number, required: false },
-  user: { type: mongoose.Schema.Types.Number, ref: "User" },
+  user: { type: mongoose.Schema.Types.Number, ref: USER_NAME },
   title: { type: String, required: true },
 });
 
-autoIncrementModel(album, ALBUM_NAME);
+autoIncrementModel(album, "Album");
 
-export { ALBUM_NAME };
+album.pre("deleteMany", async function (next) {
+  const { _conditions: document } = this;
+  await Photo.deleteMany({ user: document._id });
+  next();
+});
 
-export default mongoose.model(ALBUM_NAME, album);
+album.pre("deleteOne", async function (next) {
+  const { _conditions: document } = this;
+  await Photo.deleteMany({ album: document._id });
+  next();
+});
+
+export default mongoose.model("Album", album);

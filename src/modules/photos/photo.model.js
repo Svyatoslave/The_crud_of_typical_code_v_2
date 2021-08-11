@@ -1,20 +1,16 @@
 import mongoose from "mongoose";
 
 import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-import Album from "../albums/album.model.js";
-
-const PHOTO_NAME = "photo";
+import { ALBUM_NAME } from "../modelsName.js";
 
 const photo = new mongoose.Schema({
   _id: { type: Number, required: false },
-  album: { type: mongoose.Schema.Types.Number, ref: "Album" },
+  album: { type: mongoose.Schema.Types.Number, ref: ALBUM_NAME },
   title: { type: String, required: true },
   url: { type: String, required: true },
   thumbnailUrl: { type: String, required: true },
 });
 
-autoIncrementModel(photo, PHOTO_NAME);
+autoIncrementModel(photo, "Photo");
 
-export { PHOTO_NAME };
-
-export default mongoose.model(PHOTO_NAME, photo);
+export default mongoose.model("Photo", photo);

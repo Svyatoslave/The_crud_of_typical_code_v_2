@@ -1,45 +1,24 @@
-import { USER_NAME } from "./user.model.js";
-import TodoService from "../todos/todos.service.js";
-import PostService from "../posts/posts.service.js";
-import AlbumService from "../albums/albums.service.js";
+import User from "./user.model.js";
 
 class UserService {
   async create(user) {
-    const createdUser = await USER_NAME.create({ ...user });
-    return createdUser;
+    return User.create({ ...user });
   }
 
   async getAll() {
-    const users = await USER_NAME.find();
-    return users;
+    return User.find();
   }
 
   async getOne(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-    const user = await USER_NAME.findById(id);
-    return user;
+    return User.findById(id);
   }
 
-  async update(user) {
-    if (!user._id) {
-      throw new Error("ID not request");
-    }
-    const updatedUser = await USER_NAME.findByIdAndUpdate(user._id, user, {
-      new: true,
-    });
-    return updatedUser;
+  async update(user, id) {
+    return User.findByIdAndUpdate(id, user, { new: true });
   }
 
-  async delete(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-    const user = await USER_NAME.findByIdAndDelete(id);
-    await AlbumService.removeAlbums(id);
-    await PostService.removePosts(id);
-    await TodoService.removeTodos(id);
+  async delete(user) {
+    return User.deleteOne(user);
   }
 }
 

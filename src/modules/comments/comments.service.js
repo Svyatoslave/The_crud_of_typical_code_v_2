@@ -1,55 +1,24 @@
 import Comment from "./comment.model.js";
 
 class CommentService {
-  async getAll() {
-    const comments = await Comment.find();
-
-    return comments;
+  async create(comment) {
+    return Comment.create({ ...comment });
   }
 
-  async create(comment, id) {
-    const createdComment = await Comment.create({ ...comment });
-
-    return createdComment;
+  async getAll() {
+    return Comment.find();
   }
 
   async getOne(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-
-    const comment = await Comment.find().populate("post").exec();
-
-    return comment;
+    return Comment.findById(id);
   }
 
-  async update(comment) {
-    if (!comment._id) {
-      throw new Error("ID not request");
-    }
-
-    const updatedComment = await Comment.findByIdAndUpdate(
-      comment._id,
-      comment,
-      {
-        new: true,
-      }
-    );
-
-    return updatedComment;
+  async update(comment, id) {
+    return Comment.findByIdAndUpdate(id, comment, { new: true });
   }
 
-  async delete(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-
-    const comment = await Comment.findByIdAndDelete(id);
-
-    return comment;
-  }
-  async removeComments(id) {
-    await Comment.remove({ post: id });
+  async delete(comment) {
+    return Comment.deleteOne(comment);
   }
 }
 

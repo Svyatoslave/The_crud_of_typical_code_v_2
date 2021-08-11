@@ -3,25 +3,30 @@ import PhotoService from "./photos.service.js";
 class photosController {
   async create(req, res) {
     try {
-      const photo = await PhotoService.create(req.body, req.body.id);
-      res.status(200).json(photo);
+      const photo = await PhotoService.create(req.body, req.body);
+      res.status(201).json(photo);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 
   async getAll(_, res) {
     try {
       const photos = await PhotoService.getAll();
-      return res.json(photos);
+
+      return res.status(200).json(photos);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 
   async getOne(req, res) {
     try {
       const photo = await PhotoService.getOne(req.params.id);
+      if (!photo)
+        return res
+          .status(404)
+          .json({ message: `Photo by id #${req.params.id} is not defined` });
 
       return res.json(photo);
     } catch (err) {
@@ -31,7 +36,13 @@ class photosController {
 
   async update(req, res) {
     try {
-      const updatedPhoto = await PhotoService.update(req.body);
+      const existPhoto = await PhotoService.getOne(req.params.id);
+      if (!photo)
+        return res
+          .status(404)
+          .json({ message: `Photo by id #${req.params.id} is not defined` });
+
+      const updatedPhoto = await PhotoService.update(req.body, req.params.id);
 
       return res.json(updatedPhoto);
     } catch (err) {
@@ -41,10 +52,17 @@ class photosController {
 
   async delete(req, res) {
     try {
-      const photo = await PhotoService.delete(req.params.id);
+      const existPhoto = await PhotoService.getOne(req.params.id);
+      if (!existPhoto)
+        return res
+          .status(404)
+          .json({ message: `Photo by id #${req.params.id} is not defined` });
+
+      await PhotoService.delete(existPhoto);
 
       return res.json(true);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   }

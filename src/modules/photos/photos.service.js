@@ -1,47 +1,24 @@
 import Photo from "./photo.model.js";
 
 class PhotoService {
-  async create(photo, id) {
-    const createdPhoto = await Photo.create({ ...photo });
-    return createdPhoto;
+  async create(photo) {
+    return Photo.create({ ...photo });
   }
 
   async getAll() {
-    const photos = await Photo.find();
-    return photos;
+    return Photo.find();
   }
 
   async getOne(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-    const photo = await Photo.findById(id).populate("album").exec();
-
-    return photo;
+    return Photo.findById(id);
   }
 
-  async update(photo) {
-    if (!photo._id) {
-      throw new Error("ID not request");
-    }
-
-    const updatedPhoto = await Photo.findByIdAndUpdate(photo._id, photo, {
-      new: true,
-    });
-
-    return updatedPhoto;
+  async update(photo, id) {
+    return Photo.findByIdAndUpdate(id, photo, { new: true });
   }
 
-  async delete(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-
-    const photo = await Photo.findByIdAndDelete(id);
-    await AlbumService.removeAlbums(id);
-  }
-  async removePhotos(id) {
-    await Photo.remove({ album: id });
+  async delete(photo) {
+    return Photo.deleteOne(photo);
   }
 }
 

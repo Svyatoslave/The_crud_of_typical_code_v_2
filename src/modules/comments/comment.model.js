@@ -1,19 +1,16 @@
 import mongoose from "mongoose";
 
 import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-
-const COMMENT_NAME = "comment";
+import { POST_NAME } from "../modelsName.js";
 
 const comment = new mongoose.Schema({
   _id: { type: Number, required: false },
-  post: { type: mongoose.Schema.Types.Number, ref: "Post" },
+  post: { type: mongoose.Schema.Types.Number, ref: POST_NAME },
   name: { type: String, required: true },
   email: { type: String, required: true },
   body: { type: String, required: true },
 });
 
-autoIncrementModel(comment, COMMENT_NAME);
+autoIncrementModel(comment, "Comment");
 
-export { COMMENT_NAME };
-
-export default mongoose.model(COMMENT_NAME, comment);
+export default mongoose.model("Comment", comment);

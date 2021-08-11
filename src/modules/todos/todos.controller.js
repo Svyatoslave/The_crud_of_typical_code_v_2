@@ -3,10 +3,10 @@ import TodoService from "./todos.service.js";
 class todosController {
   async create(req, res) {
     try {
-      const todo = await TodoService.create(req.body, req.body.id);
-      res.status(200).json(todo);
+      const todo = await TodoService.create(req.body, req.body);
+      res.status(201).json(todo);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 
@@ -14,15 +14,19 @@ class todosController {
     try {
       const todos = await TodoService.getAll();
 
-      return res.json(todos);
+      return res.status(200).json(todos);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 
   async getOne(req, res) {
     try {
       const todo = await TodoService.getOne(req.params.id);
+      if (!todo)
+        return res
+          .status(404)
+          .json({ message: `Todo by id #${req.params.id} is not defined` });
 
       return res.json(todo);
     } catch (err) {
@@ -32,7 +36,13 @@ class todosController {
 
   async update(req, res) {
     try {
-      const updatedTodo = await TodoService.update(req.body);
+      const existTodo = await TodoService.getOne(req.params.id);
+      if (!todo)
+        return res
+          .status(404)
+          .json({ message: `Todo by id #${req.params.id} is not defined` });
+
+      const updatedTodo = await TodoService.update(req.body, req.params.id);
 
       return res.json(updatedTodo);
     } catch (err) {
@@ -42,10 +52,17 @@ class todosController {
 
   async delete(req, res) {
     try {
-      const todo = await TodoService.delete(req.params.id);
+      const existTodo = await TodoService.getOne(req.params.id);
+      if (!existTodo)
+        return res
+          .status(404)
+          .json({ message: `Todo by id #${req.params.id} is not defined` });
+
+      await TodoService.delete(existTodo);
 
       return res.json(true);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   }

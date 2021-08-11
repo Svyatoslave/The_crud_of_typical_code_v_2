@@ -2,48 +2,23 @@ import Todo from "./todo.model.js";
 
 class TodoService {
   async create(todo) {
-    const createdTodo = await Todo.create({ ...todo });
-    return createdTodo;
+    return Todo.create({ ...todo });
   }
 
   async getAll() {
-    const todos = await todo.find().populate("userId").exec();
-
-    return todos;
+    return Todo.find();
   }
 
   async getOne(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-    const todo = await Todo.findById(id).populate("user").exec();
-
-    return todo;
+    return Todo.findById(id);
   }
 
-  async update(todo) {
-    if (!todo._id) {
-      throw new Error("ID not request");
-    }
-
-    const updatedTodo = await Todo.findByIdAndUpdate(todo._id, todo, {
-      new: true,
-    });
-
-    return updatedTodo;
+  async update(todo, id) {
+    return Todo.findByIdAndUpdate(id, todo, { new: true });
   }
 
-  async delete(id) {
-    if (!id) {
-      throw new Error("ID not request");
-    }
-
-    const todo = await Todo.findByIdAndDelete(id);
-
-    return todo;
-  }
-  async removeTodos(id) {
-    await Todo.remove({ user: id });
+  async delete(todo) {
+    return Todo.deleteOne(todo);
   }
 }
 

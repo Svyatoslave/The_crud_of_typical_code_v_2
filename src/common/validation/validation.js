@@ -1,4 +1,4 @@
-import validationType from "./validationFunc.js";
+import { validationType, validationRequired } from "./validationFunc.js";
 
 export function validation(schema, data) {
   const schemaNow = Object.entries(schema);
@@ -8,10 +8,20 @@ export function validation(schema, data) {
       if (!validation(value, data[key])) {
         return false;
       }
-    } else if (!validationType(data[key], value)) {
-      return false;
+    } else {
+      const isMatch = [
+        validationType(data[key], value),
+        validationRequired(data[key], value),
+      ].every(validationFunc);
+      if (!isMatch) {
+        return false;
+      }
     }
   }
 
   return true;
+}
+
+function validationFunc(Func) {
+  return Func;
 }

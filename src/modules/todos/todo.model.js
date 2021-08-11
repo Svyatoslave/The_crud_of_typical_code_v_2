@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
-import { USER_NAME } from "../users/user.model.js";
 import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-
-const TODO_NAME = "TODO";
+import { USER_NAME } from "../modelsName.js";
 
 const todo = new mongoose.Schema({
   _id: { type: Number, required: false },
@@ -12,8 +10,6 @@ const todo = new mongoose.Schema({
   completed: { type: Boolean, required: true },
 });
 
-autoIncrementModel(todo, TODO_NAME);
+autoIncrementModel(todo, "Todo");
 
-export { TODO_NAME };
-
-export default mongoose.model(TODO_NAME, todo);
+export default mongoose.model("Todo", todo);

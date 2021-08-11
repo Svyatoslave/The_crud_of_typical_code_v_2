@@ -1,23 +1,23 @@
 const userValidationSchema = {
-  name: { type: "string" },
-  username: { type: "string" },
-  email: { type: "string" },
+  name: { type: "string", required: true },
+  username: { type: "string", required: true },
+  email: { type: "string", required: true },
   address: {
-    street: { type: "string" },
-    suite: { type: "string" },
-    city: { type: "string" },
-    zipcode: { type: "string" },
+    street: { type: "string", required: true },
+    suite: { type: "string", required: true },
+    city: { type: "string", required: true },
+    zipcode: { type: "string", required: true },
     geo: {
-      lat: { type: "string" },
-      lng: { type: "string" },
+      lat: { type: "string", required: true },
+      lng: { type: "string", required: true },
     },
   },
-  phone: { type: "string" },
-  website: { type: "string" },
+  phone: { type: "string", required: true },
+  website: { type: "string", required: true },
   company: {
-    name: { type: "string" },
-    catchPhrase: { type: "string" },
-    bs: { type: "string" },
+    name: { type: "string", required: true },
+    catchPhrase: { type: "string", required: true },
+    bs: { type: "string", required: true },
   },
 };
 

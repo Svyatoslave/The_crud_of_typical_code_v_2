@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
-import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
 
-const USER_NAME = "User";
+import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
+import Album from "../albums/album.model.js";
+import Post from "../posts/post.model.js";
+import Todo from "../todos/todo.model.js";
 
 const user = new mongoose.Schema({
   _id: { type: Number, required: false },
@@ -27,13 +29,14 @@ const user = new mongoose.Schema({
   },
 });
 
-autoIncrementModel(user, USER_NAME);
+autoIncrementModel(user, "User");
 
-// user.pre("deleteOne", (...args) => {
-//   console.log("Remove user");
-//   console.log(args);
-// });
+user.pre("deleteOne", async function (next) {
+  const { _conditions: document } = this;
+  await Album.deleteMany({ user: document._id });
+  await Post.deleteMany({ user: document._id });
+  await Todo.deleteMany({ user: document._id });
+  next();
+});
 
-export { USER_NAME };
-
-export default mongoose.model(USER_NAME, user);
+export default mongoose.model("User", user);

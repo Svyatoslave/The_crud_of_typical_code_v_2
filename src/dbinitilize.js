@@ -1,5 +1,11 @@
 import axios from "axios";
-import models from "./modules/allmodules.js";
+
+import UserService from "./modules/users/users.service.js";
+import TodoService from "./modules/todos/todos.service.js";
+import PostService from "./modules/posts/posts.service.js";
+import PhotoService from "./modules/photos/photos.service.js";
+import CommentService from "./modules/comments/comments.service.js";
+import AlbumService from "./modules/albums/albums.service.js";
 
 const getUrl = (str) => `https://jsonplaceholder.typicode.com/${str}`;
 
@@ -16,10 +22,10 @@ class Initialize {
   async #initializeAlbums() {
     const { data } = await axios.get(getUrl("albums"));
 
-    for (let { id, userId, ...item } of [...data.slice(0, 10)]) {
-      const existmodel = await models.albums.findById(id).exec();
+    for (let { id, userId, ...item } of [...data]) {
+      const existmodel = await AlbumService.getOne(id);
       if (!existmodel) {
-        await models.albums.create({ ...item, _id: id, user: userId });
+        await AlbumService.create({ ...item, _id: id, user: userId });
       }
     }
     console.log("albums-complete", "💩");
@@ -28,10 +34,10 @@ class Initialize {
   async #initializeComments() {
     const { data } = await axios.get(getUrl("comments"));
 
-    for (let { id, postId, ...item } of [...data.slice(0, 10)]) {
-      const existmodel = await models.comments.findById(id).exec();
+    for (let { id, postId, ...item } of [...data]) {
+      const existmodel = await CommentService.getOne(id);
       if (!existmodel) {
-        await models.comments.create({ ...item, _id: id, post: postId });
+        await CommentService.create({ ...item, _id: id, post: postId });
       }
     }
     console.log("comments-complete", "💩");
@@ -40,10 +46,10 @@ class Initialize {
   async #initializePhotos() {
     const { data } = await axios.get(getUrl("photos"));
 
-    for (let { id, albumId, ...item } of [...data.slice(0, 10)]) {
-      const existmodel = await models.photos.findById(id).exec();
+    for (let { id, albumId, ...item } of [...data]) {
+      const existmodel = await PhotoService.getOne(id);
       if (!existmodel) {
-        await models.photos.create({ ...item, _id: id, album: albumId });
+        await PhotoService.create({ ...item, _id: id, album: albumId });
       }
     }
     console.log("photos-complete", "💩");
@@ -52,10 +58,10 @@ class Initialize {
   async #initializePosts() {
     const { data } = await axios.get(getUrl("posts"));
 
-    for (let { id, userId, ...item } of [...data.slice(0, 10)]) {
-      const existmodel = await models.posts.findById(id).exec();
+    for (let { id, userId, ...item } of [...data]) {
+      const existmodel = await PostService.getOne(id);
       if (!existmodel) {
-        await models.posts.create({ ...item, _id: id, user: userId });
+        await PostService.create({ ...item, _id: id, user: userId });
       }
     }
     console.log("posts-complete", "💩");
@@ -64,10 +70,10 @@ class Initialize {
   async #initializeTodos() {
     const { data } = await axios.get(getUrl("todos"));
 
-    for (let { id, userId, ...item } of [...data.slice(0, 10)]) {
-      const existmodel = await models.todos.findById(id).exec();
+    for (let { id, userId, ...item } of [...data]) {
+      const existmodel = await TodoService.getOne(id);
       if (!existmodel) {
-        await models.todos.create({ ...item, _id: id, user: userId });
+        await TodoService.create({ ...item, _id: id, user: userId });
       }
     }
     console.log("todos-complete", "💩");
@@ -76,10 +82,10 @@ class Initialize {
   async #initializeUsers() {
     const { data } = await axios.get(getUrl("users"));
 
-    for (let { id, ...item } of [...data.slice(0, 10)]) {
-      const existmodel = await models.users.findById(id).exec();
+    for (let { id, ...item } of [...data]) {
+      const existmodel = await UserService.getOne(id);
       if (!existmodel) {
-        await models.users.create({ ...item, _id: id });
+        await UserService.create({ ...item, _id: id });
       }
     }
     console.log("users-complete", "💩");
