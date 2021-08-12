@@ -16,7 +16,11 @@ photosRouter.get(`/photos`, photosController.getAll);
 
 photosRouter.get(`/photos/:id`, photosController.getOne);
 
-photosRouter.put(`/photos/:id`, photosController.update);
+photosRouter.put(
+  `/photos/:id`,
+  validationMiddlewar(photoValidationSchema),
+  photosController.update
+);
 
 photosRouter.delete(`/photos/:id`, photosController.delete);
 

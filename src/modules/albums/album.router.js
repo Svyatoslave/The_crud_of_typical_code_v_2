@@ -16,7 +16,11 @@ albumsRouter.get(`/albums`, albumsController.getAll);
 
 albumsRouter.get(`/albums/:id`, albumsController.getOne);
 
-albumsRouter.put(`/albums/:id`, albumsController.update);
+albumsRouter.put(
+  `/albums/:id`,
+  validationMiddlewar(albumValidationSchema),
+  albumsController.update
+);
 
 albumsRouter.delete(`/albums/:id`, albumsController.delete);
 

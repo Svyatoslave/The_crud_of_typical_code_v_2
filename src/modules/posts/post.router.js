@@ -16,7 +16,11 @@ postsRouter.get(`/posts`, postsController.getAll);
 
 postsRouter.get(`/posts/:id`, postsController.getOne);
 
-postsRouter.put(`/posts/:id`, postsController.update);
+postsRouter.put(
+  `/posts/:id`,
+  validationMiddlewar(postValidationSchema),
+  postsController.update
+);
 
 postsRouter.delete(`/posts/:id`, postsController.delete);
 

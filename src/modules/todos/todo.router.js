@@ -12,7 +12,11 @@ todosRouter.post(
 );
 todosRouter.get(`/todos`, todosController.getAll);
 todosRouter.get(`/todos/:id`, todosController.getOne);
-todosRouter.put(`/todos/:id`, todosController.update);
+todosRouter.put(
+  `/todos/:id`,
+  validationMiddlewar(todoValidationSchema),
+  todosController.update
+);
 todosRouter.delete(`/todos/:id`, todosController.delete);
 
 export default todosRouter;
