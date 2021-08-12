@@ -37,7 +37,7 @@ class photosController {
   async update(req, res) {
     try {
       const existPhoto = await PhotoService.getOne(req.params.id);
-      if (!photo)
+      if (!existPhoto)
         return res
           .status(404)
           .json({ message: `Photo by id #${req.params.id} is not defined` });

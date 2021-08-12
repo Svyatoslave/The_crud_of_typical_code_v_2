@@ -22,7 +22,7 @@ class Initialize {
   async #initializeAlbums() {
     const { data } = await axios.get(getUrl("albums"));
 
-    for (let { id, userId, ...item } of [...data]) {
+    for (let { id, userId, ...item } of [...data.slice(0, 10)]) {
       const existmodel = await AlbumService.getOne(id);
       if (!existmodel) {
         await AlbumService.create({ ...item, _id: id, user: userId });
@@ -34,7 +34,7 @@ class Initialize {
   async #initializeComments() {
     const { data } = await axios.get(getUrl("comments"));
 
-    for (let { id, postId, ...item } of [...data]) {
+    for (let { id, postId, ...item } of [...data.slice(0, 10)]) {
       const existmodel = await CommentService.getOne(id);
       if (!existmodel) {
         await CommentService.create({ ...item, _id: id, post: postId });
@@ -46,7 +46,7 @@ class Initialize {
   async #initializePhotos() {
     const { data } = await axios.get(getUrl("photos"));
 
-    for (let { id, albumId, ...item } of [...data]) {
+    for (let { id, albumId, ...item } of [...data.slice(0, 10)]) {
       const existmodel = await PhotoService.getOne(id);
       if (!existmodel) {
         await PhotoService.create({ ...item, _id: id, album: albumId });
@@ -58,7 +58,7 @@ class Initialize {
   async #initializePosts() {
     const { data } = await axios.get(getUrl("posts"));
 
-    for (let { id, userId, ...item } of [...data]) {
+    for (let { id, userId, ...item } of [...data.slice(0, 10)]) {
       const existmodel = await PostService.getOne(id);
       if (!existmodel) {
         await PostService.create({ ...item, _id: id, user: userId });
@@ -70,7 +70,7 @@ class Initialize {
   async #initializeTodos() {
     const { data } = await axios.get(getUrl("todos"));
 
-    for (let { id, userId, ...item } of [...data]) {
+    for (let { id, userId, ...item } of [...data.slice(0, 10)]) {
       const existmodel = await TodoService.getOne(id);
       if (!existmodel) {
         await TodoService.create({ ...item, _id: id, user: userId });
@@ -82,7 +82,7 @@ class Initialize {
   async #initializeUsers() {
     const { data } = await axios.get(getUrl("users"));
 
-    for (let { id, ...item } of [...data]) {
+    for (let { id, ...item } of [...data.slice(0, 10)]) {
       const existmodel = await UserService.getOne(id);
       if (!existmodel) {
         await UserService.create({ ...item, _id: id });

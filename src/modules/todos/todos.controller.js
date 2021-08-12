@@ -37,7 +37,7 @@ class todosController {
   async update(req, res) {
     try {
       const existTodo = await TodoService.getOne(req.params.id);
-      if (!todo)
+      if (!existTodo)
         return res
           .status(404)
           .json({ message: `Todo by id #${req.params.id} is not defined` });

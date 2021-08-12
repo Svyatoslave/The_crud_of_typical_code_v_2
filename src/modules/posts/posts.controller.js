@@ -37,7 +37,7 @@ class postsController {
   async update(req, res) {
     try {
       const existPost = await PostService.getOne(req.params.id);
-      if (!post)
+      if (!existPost)
         return res
           .status(404)
           .json({ message: `Post by id #${req.params.id} is not defined` });

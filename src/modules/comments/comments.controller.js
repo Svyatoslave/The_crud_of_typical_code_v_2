@@ -37,7 +37,7 @@ class commentsController {
   async update(req, res) {
     try {
       const existComment = await CommentService.getOne(req.params.id);
-      if (!comment)
+      if (!existComment)
         return res
           .status(404)
           .json({ message: `Comment by id #${req.params.id} is not defined` });

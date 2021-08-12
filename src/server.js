@@ -26,7 +26,7 @@ async function bootstrap() {
       `\n  SERVER STARTED ON PORT ${PORT} !!!\n`
     );
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
 }
 

@@ -37,7 +37,7 @@ class albumsController {
   async update(req, res) {
     try {
       const existAlbum = await AlbumService.getOne(req.params.id);
-      if (!album)
+      if (!existAlbum)
         return res
           .status(404)
           .json({ message: `Album by id #${req.params.id} is not defined` });
