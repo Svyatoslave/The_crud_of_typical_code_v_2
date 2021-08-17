@@ -1,4 +1,4 @@
-import { validationType, validationRequired } from "./validationFunc.js";
+import { validationType, validationRequired } from "./validationFunc";
 
 export function validation(schema, data) {
   const schemaNow = Object.entries(schema);

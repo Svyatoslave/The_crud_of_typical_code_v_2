@@ -1,4 +1,4 @@
-import Todo from "./todo.model.js";
+import Todo from "./todo.model";
 
 class TodoService {
   async create(todo) {
@@ -19,6 +19,9 @@ class TodoService {
 
   async delete(todo) {
     return Todo.deleteOne(todo);
+  }
+  async getOneLast() {
+    return Todo.findOne({}, {}, { sort: { _id: -1 } });
   }
 }
 

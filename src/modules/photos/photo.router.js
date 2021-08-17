@@ -1,8 +1,8 @@
 import Router from "express";
 
-import photosController from "./photos.controller.js";
-import photoValidationSchema from "./photo.validationSchema.js";
-import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
+import photosController from "./photos.controller";
+import photoValidationSchema from "./photo.validationSchema";
+import validationMiddlewar from "../../common/validation/validationMiddlewar";
 
 const photosRouter = new Router();
 

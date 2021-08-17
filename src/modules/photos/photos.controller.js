@@ -1,4 +1,4 @@
-import PhotoService from "./photos.service.js";
+import PhotoService from "./photos.service";
 
 class photosController {
   async create(req, res) {
@@ -6,7 +6,7 @@ class photosController {
       const photo = await PhotoService.create(req.body, req.body);
       res.status(201).json(photo);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -16,19 +16,17 @@ class photosController {
 
       return res.status(200).json(photos);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
   async getOne(req, res) {
     try {
       const photo = await PhotoService.getOne(req.params.id);
-      if (!photo)
-        return res
-          .status(404)
-          .json({ message: `Photo by id #${req.params.id} is not defined` });
+      if (!photo) return res.status(404);
+      on({ message: `Photo by id #${req.params.id} is not defined` });
 
-      return res.json(photo);
+      return reson(photo);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -60,7 +58,7 @@ class photosController {
 
       await PhotoService.delete(existPhoto);
 
-      return res.json(true);
+      return reson(true);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

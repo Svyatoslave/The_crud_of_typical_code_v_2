@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import UserService from "./modules/users/users.service.js";
-import TodoService from "./modules/todos/todos.service.js";
-import PostService from "./modules/posts/posts.service.js";
-import PhotoService from "./modules/photos/photos.service.js";
-import CommentService from "./modules/comments/comments.service.js";
-import AlbumService from "./modules/albums/albums.service.js";
+import UserService from "./modules/users/users.service";
+import TodoService from "./modules/todos/todos.service";
+import PostService from "./modules/posts/posts.service";
+import PhotoService from "./modules/photos/photos.service";
+import CommentService from "./modules/comments/comments.service";
+import AlbumService from "./modules/albums/albums.service";
 
 const getUrl = (str) => `https://jsonplaceholder.typicode.com/${str}`;
 

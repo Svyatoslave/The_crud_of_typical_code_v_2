@@ -1,4 +1,4 @@
-import PostService from "./posts.service.js";
+import PostService from "./posts.service";
 
 class postsController {
   async create(req, res) {
@@ -6,7 +6,7 @@ class postsController {
       const post = await PostService.create(req.body, req.body);
       res.status(201).json(post);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -16,7 +16,7 @@ class postsController {
 
       return res.status(200).json(posts);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -28,7 +28,7 @@ class postsController {
           .status(404)
           .json({ message: `Post by id #${req.params.id} is not defined` });
 
-      return res.json(post);
+      return reson(post);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -44,7 +44,7 @@ class postsController {
 
       const updatedPost = await PostService.update(req.body, req.params.id);
 
-      return res.json(updatedPost);
+      return reson(updatedPost);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -60,7 +60,7 @@ class postsController {
 
       await PostService.delete(existPost);
 
-      return res.json(true);
+      return reson(true);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

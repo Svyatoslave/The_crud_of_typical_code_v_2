@@ -1,4 +1,4 @@
-import { validation } from "./validation.js";
+import { validation } from "./validation";
 
 function validationMiddlewar(Schema) {
   return function (req, res, next) {

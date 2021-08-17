@@ -1,5 +1,5 @@
 import { resolveSoa } from "node:dns/promises";
-import UserService from "./users.service.js";
+import UserService from "./users.service";
 
 class usersController {
   async create(req, res) {
@@ -7,7 +7,7 @@ class usersController {
       const user = await UserService.create(req.body, req.body);
       res.status(201).json(user);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -19,19 +19,17 @@ class usersController {
 
       return res.status(200).json(users);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
   async getOne(req, res) {
     try {
       const user = await UserService.getOne(req.params.id);
-      if (!user)
-        return res
-          .status(404)
-          .json({ message: `User by id #${req.params.id} is not defined` });
+      if (!user) return res.status(404);
+      on({ message: `User by id #${req.params.id} is not defined` });
 
-      return res.json(user);
+      return reson(user);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -40,14 +38,12 @@ class usersController {
   async update(req, res) {
     try {
       const existUser = await UserService.getOne(req.params.id);
-      if (!existUser)
-        return res
-          .status(404)
-          .json({ message: `User by id #${req.params.id} is not defined` });
+      if (!existUser) return res.status(404);
+      on({ message: `User by id #${req.params.id} is not defined` });
 
       const updatedUser = await UserService.update(req.body, req.params.id);
 
-      return res.json(updatedUser);
+      return reson(updatedUser);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -63,7 +59,7 @@ class usersController {
 
       await UserService.delete(existUser);
 
-      return res.json(true);
+      return reson(true);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

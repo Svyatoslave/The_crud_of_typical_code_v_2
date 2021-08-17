@@ -1,4 +1,4 @@
-import AlbumService from "./albums.service.js";
+import AlbumService from "./albums.service";
 
 class albumsController {
   async create(req, res) {
@@ -6,7 +6,8 @@ class albumsController {
       const album = await AlbumService.create(req.body, req.body);
       res.status(201).json(album);
     } catch (err) {
-      res.status(400).json(err);
+      console.log(err);
+      res.status(500).json(err);
     }
   }
 
@@ -16,17 +17,15 @@ class albumsController {
 
       return res.status(200).json(albums);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
   async getOne(req, res) {
     try {
       const album = await AlbumService.getOne(req.params.id);
-      if (!album)
-        return res
-          .status(404)
-          .json({ message: `Album by id #${req.params.id} is not defined` });
+      if (!album) return res.status(404);
+      on({ message: `Album by id #${req.params.id} is not defined` });
 
       return res.json(album);
     } catch (err) {
@@ -37,10 +36,8 @@ class albumsController {
   async update(req, res) {
     try {
       const existAlbum = await AlbumService.getOne(req.params.id);
-      if (!existAlbum)
-        return res
-          .status(404)
-          .json({ message: `Album by id #${req.params.id} is not defined` });
+      if (!existAlbum) return res.status(404);
+      on({ message: `Album by id #${req.params.id} is not defined` });
 
       const updatedAlbum = await AlbumService.update(req.body, req.params.id);
 
@@ -53,10 +50,8 @@ class albumsController {
   async delete(req, res) {
     try {
       const existAlbum = await AlbumService.getOne(req.params.id);
-      if (!existAlbum)
-        return res
-          .status(404)
-          .json({ message: `Album by id #${req.params.id} is not defined` });
+      if (!existAlbum) return res.status(404);
+      on({ message: `Album by id #${req.params.id} is not defined` });
 
       await AlbumService.delete(existAlbum);
 

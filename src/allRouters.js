@@ -1,9 +1,9 @@
-import AlbumsRouter from "./modules/albums/album.router.js";
-import CommentsRouter from "./modules/comments/comment.router.js";
-import PhotosRouter from "./modules/photos/photo.router.js";
-import PostsRouter from "./modules/posts/post.router.js";
-import TodosRouter from "./modules/todos/todo.router.js";
-import UsersRouter from "./modules/users/user.router.js";
+import AlbumsRouter from "./modules/albums/album.router";
+import CommentsRouter from "./modules/comments/comment.router";
+import PhotosRouter from "./modules/photos/photo.router";
+import PostsRouter from "./modules/posts/post.router";
+import TodosRouter from "./modules/todos/todo.router";
+import UsersRouter from "./modules/users/user.router";
 
 const routers = [
   AlbumsRouter,

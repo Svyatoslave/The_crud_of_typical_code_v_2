@@ -1,8 +1,8 @@
 import Router from "express";
 
-import commentsController from "./comments.controller.js";
-import commentValidationSchema from "./comment.validationSchema.js";
-import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
+import commentsController from "./comments.controller";
+import commentValidationSchema from "./comment.validationSchema";
+import validationMiddlewar from "../../common/validation/validationMiddlewar";
 
 const commentsRouter = new Router();
 

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-import { POST_NAME } from "../modelsName.js";
+import autoIncrementModel from "../../common/mongoose/autoIncrement";
+import { POST_NAME } from "../modelsName";
 
 const comment = new mongoose.Schema({
   _id: { type: Number, required: false },

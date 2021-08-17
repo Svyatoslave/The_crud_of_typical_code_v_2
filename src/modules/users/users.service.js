@@ -1,4 +1,4 @@
-import User from "./user.model.js";
+import User from "./user.model";
 
 class UserService {
   async create(user) {
@@ -19,6 +19,9 @@ class UserService {
 
   async delete(user) {
     return User.deleteOne(user);
+  }
+  async getOneLast() {
+    return User.findOne({}, {}, { sort: { _id: -1 } });
   }
 }
 

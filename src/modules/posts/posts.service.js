@@ -1,4 +1,4 @@
-import Post from "./post.model.js";
+import Post from "./post.model";
 
 class PostService {
   async create(post) {
@@ -19,6 +19,9 @@ class PostService {
 
   async delete(post) {
     return Post.deleteOne(post);
+  }
+  async getOneLast() {
+    return Post.findOne({}, {}, { sort: { _id: -1 } });
   }
 }
 

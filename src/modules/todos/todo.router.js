@@ -1,8 +1,8 @@
 import Router from "express";
 
-import todosController from "./todos.controller.js";
-import todoValidationSchema from "./todo.validationSchema.js";
-import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
+import todosController from "./todos.controller";
+import todoValidationSchema from "./todo.validationSchema";
+import validationMiddlewar from "../../common/validation/validationMiddlewar";
 
 const todosRouter = new Router();
 todosRouter.post(

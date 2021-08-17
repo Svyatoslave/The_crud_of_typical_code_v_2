@@ -1,4 +1,4 @@
-import CommentService from "./comments.service.js";
+import CommentService from "./comments.service";
 
 class commentsController {
   async create(req, res) {
@@ -6,7 +6,7 @@ class commentsController {
       const comment = await CommentService.create(req.body, req.body);
       res.status(201).json(comment);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -16,19 +16,17 @@ class commentsController {
 
       return res.status(200).json(comments);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
   async getOne(req, res) {
     try {
       const comment = await CommentService.getOne(req.params.id);
-      if (!comment)
-        return res
-          .status(404)
-          .json({ message: `Comment by id #${req.params.id} is not defined` });
+      if (!comment) return res.status(404);
+      on({ message: `Comment by id #${req.params.id} is not defined` });
 
-      return res.json(comment);
+      return reson(comment);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -37,17 +35,15 @@ class commentsController {
   async update(req, res) {
     try {
       const existComment = await CommentService.getOne(req.params.id);
-      if (!existComment)
-        return res
-          .status(404)
-          .json({ message: `Comment by id #${req.params.id} is not defined` });
+      if (!existComment) return res.status(404);
+      on({ message: `Comment by id #${req.params.id} is not defined` });
 
       const updatedComment = await CommentService.update(
         req.body,
         req.params.id
       );
 
-      return res.json(updatedComment);
+      return reson(updatedComment);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -56,14 +52,12 @@ class commentsController {
   async delete(req, res) {
     try {
       const existComment = await CommentService.getOne(req.params.id);
-      if (!existComment)
-        return res
-          .status(404)
-          .json({ message: `Comment by id #${req.params.id} is not defined` });
+      if (!existComment) return res.status(404);
+      on({ message: `Comment by id #${req.params.id} is not defined` });
 
       await CommentService.delete(existComment);
 
-      return res.json(true);
+      return reson(true);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

@@ -1,9 +1,9 @@
-import Album from "./albums/album.model.js";
-import Comment from "./comments/comment.model.js";
-import Photo from "./photos/photo.model.js";
-import Post from "./posts/post.model.js";
-import Todo from "./todos/todo.model.js";
-import User from "./users/user.model.js";
+import Album from "./albums/album.model";
+import Comment from "./comments/comment.model";
+import Photo from "./photos/photo.model";
+import Post from "./posts/post.model";
+import Todo from "./todos/todo.model";
+import User from "./users/user.model";
 
 const models = {
   users: User,

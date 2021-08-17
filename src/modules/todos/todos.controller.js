@@ -1,4 +1,4 @@
-import TodoService from "./todos.service.js";
+import TodoService from "./todos.service";
 
 class todosController {
   async create(req, res) {
@@ -6,7 +6,7 @@ class todosController {
       const todo = await TodoService.create(req.body, req.body);
       res.status(201).json(todo);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -16,7 +16,7 @@ class todosController {
 
       return res.status(200).json(todos);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 
@@ -28,7 +28,7 @@ class todosController {
           .status(404)
           .json({ message: `Todo by id #${req.params.id} is not defined` });
 
-      return res.json(todo);
+      return reson(todo);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -44,7 +44,7 @@ class todosController {
 
       const updatedTodo = await TodoService.update(req.body, req.params.id);
 
-      return res.json(updatedTodo);
+      return reson(updatedTodo);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -60,7 +60,7 @@ class todosController {
 
       await TodoService.delete(existTodo);
 
-      return res.json(true);
+      return reson(true);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

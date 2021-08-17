@@ -1,4 +1,4 @@
-import Comment from "./comment.model.js";
+import Comment from "./comment.model";
 
 class CommentService {
   async create(comment) {
@@ -19,6 +19,9 @@ class CommentService {
 
   async delete(comment) {
     return Comment.deleteOne(comment);
+  }
+  async getOneLast() {
+    return Comment.findOne({}, {}, { sort: { _id: -1 } });
   }
 }
 

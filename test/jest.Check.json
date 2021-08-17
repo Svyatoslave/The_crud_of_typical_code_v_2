@@ -1,0 +1,6 @@
+{
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testMatch": ["**/?(*.)+(Check).js"],
+  "coveragePathIgnorePatterns": ["/node_modules/"]
+}

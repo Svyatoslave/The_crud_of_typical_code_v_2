@@ -1,8 +1,8 @@
 import Router from "express";
 
-import albumsController from "./albums.controller.js";
-import albumValidationSchema from "./album.validationSchema.js";
-import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
+import albumsController from "./albums.controller";
+import albumValidationSchema from "./album.validationSchema";
+import validationMiddlewar from "../../common/validation/validationMiddlewar";
 
 const albumsRouter = new Router();
 

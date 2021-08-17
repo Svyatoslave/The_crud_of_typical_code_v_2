@@ -1,4 +1,4 @@
-import Photo from "./photo.model.js";
+import Photo from "./photo.model";
 
 class PhotoService {
   async create(photo) {
@@ -19,6 +19,9 @@ class PhotoService {
 
   async delete(photo) {
     return Photo.deleteOne(photo);
+  }
+  async getOneLast() {
+    return Photo.findOne({}, {}, { sort: { _id: -1 } });
   }
 }
 

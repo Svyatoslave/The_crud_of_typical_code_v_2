@@ -1,8 +1,8 @@
 import Router from "express";
 
-import usersController from "./users.controller.js";
-import userValidationSchema from "./user.validationSchema.js";
-import validationMiddleware from "../../common/validation/validationMiddlewar.js";
+import usersController from "./users.controller";
+import userValidationSchema from "./user.validationSchema";
+import validationMiddleware from "../../common/validation/validationMiddlewar";
 
 const usersRouter = new Router();
 

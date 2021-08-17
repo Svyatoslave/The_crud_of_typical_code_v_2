@@ -1,8 +1,8 @@
 import Router from "express";
 
-import postsController from "./posts.controller.js";
-import postValidationSchema from "./post.validationSchema.js";
-import validationMiddlewar from "../../common/validation/validationMiddlewar.js";
+import postsController from "./posts.controller";
+import postValidationSchema from "./post.validationSchema";
+import validationMiddlewar from "../../common/validation/validationMiddlewar";
 
 const postsRouter = new Router();
 

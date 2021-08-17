@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-import { USER_NAME } from "../modelsName.js";
+import autoIncrementModel from "../../common/mongoose/autoIncrement";
+import { USER_NAME } from "../modelsName";
 
 const todo = new mongoose.Schema({
   _id: { type: Number, required: false },

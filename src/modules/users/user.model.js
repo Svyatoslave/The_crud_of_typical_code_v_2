@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-import autoIncrementModel from "../../common/mongoose/autoIncrement.js";
-import Album from "../albums/album.model.js";
-import Post from "../posts/post.model.js";
-import Todo from "../todos/todo.model.js";
+import autoIncrementModel from "../../common/mongoose/autoIncrement";
+import Album from "../albums/album.model";
+import Post from "../posts/post.model";
+import Todo from "../todos/todo.model";
 
 const user = new mongoose.Schema({
   _id: { type: Number, required: false },

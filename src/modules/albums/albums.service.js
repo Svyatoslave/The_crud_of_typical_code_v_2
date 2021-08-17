@@ -1,4 +1,4 @@
-import Album from "./album.model.js";
+import Album from "./album.model";
 
 class AlbumService {
   async create(album) {
@@ -19,6 +19,9 @@ class AlbumService {
 
   async delete(album) {
     return Album.deleteOne(album);
+  }
+  async getOneLast() {
+    return Album.findOne({}, {}, { sort: { _id: -1 } });
   }
 }
 
