@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import routing from "./allRouters";
 import initialize from "./dbinitilize";
@@ -9,6 +10,7 @@ async function bootstrap() {
   try {
     const app = express();
 
+    app.use(cors());
     app.use(express.json());
     routing(app);
 
