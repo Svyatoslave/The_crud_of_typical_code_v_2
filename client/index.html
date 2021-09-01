@@ -2,104 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Create User</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
   </head>
   <body>
-    <form class="parent">
-      <div class="child">
-        <h2>Main data</h2>
-
-        <div class="group">
-          <input type="text" name:"name" id="name" required />
-          <span class="bar"></span>
-          <label>Name</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"username" id="username" required />
-          <span class="bar"></span>
-          <label>Username</label>
-        </div>
-        <div class="group">
-          <input type="email" name:"email" id="email" required />
-          <span class="bar"></span>
-          <label>Email</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"phone" id="phone" required />
-          <span class="bar"></span>
-          <label>Phone</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"website" id="website"required />
-          <span class="bar"></span>
-          <label>Website</label>
-        </div>
-      </div>
-      <div class="child">
-        <h2>Address data</h2>
-
-        <div class="group">
-          <input type="text" name:"street" id="street"required />
-          <span class="bar"></span>
-          <label>Street</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"suite" id="suite"required />
-          <span class="bar"></span>
-          <label>Suite</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"city" id="city" required />
-          <span class="bar"></span>
-          <label>City</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"zipcode" id="zipcode" required />
-          <span class="bar"></span>
-          <label>Zipcode</label>
-        </div>
-      </div>
-      <div class="child">
-        <h2>Geo data</h2>
-
-        <div class="group">
-          <input type="text" name:"lat" id="lat"required />
-          <span class="bar"></span>
-          <label>Lat</label>
-        </div>
-        <div class="group">
-          <input type="text"name:"lng" id="lng" required />
-          <span class="bar"></span>
-          <label>Lng</label>
-        </div>
-      </div>
-      <div class="child">
-        <h2>Company data</h2>
-
-        <div class="group">
-          <input type="text" name:"nameCompany" id="nameCompany" required />
-          <span class="bar"></span>
-          <label>Name</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"catchPhrase" id="catchPhrase"required />
-          <span class="bar"></span>
-          <label>CatchPhrase</label>
-        </div>
-        <div class="group">
-          <input type="text" name:"bs" id="bs" required />
-          <span class="bar"></span>
-          <label>Bs</label>
-        </div>
-      </div>
-      <div class="submit">
-        <input type="submit" value="Create" onclick="sendJSON()" />
-      </div>
-      <div class="out"></div>
-    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
