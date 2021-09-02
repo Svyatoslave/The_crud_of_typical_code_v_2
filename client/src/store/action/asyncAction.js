@@ -1,9 +1,8 @@
 import { setUsers } from "./action";
 
-export const fetchAllUsers = () => {
-  return (dispatch) => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((json) => dispatch(setUsers(json)));
-  };
+export const fetchAllUsers = () => async (dispatch) => {
+  const response = await fetch("http://localhost:8888/users");
+  const users = await response.json();
+
+  dispatch(setUsers(users));
 };

@@ -7,11 +7,11 @@ const UserList = () => {
   const users = useSelector((state) => state.users);
 
   return (
-    <ul className="ul row">
+    <div className=" row">
       {users.map((user) => (
         <UserItem key={user.id} user={user}></UserItem>
       ))}
-    </ul>
+    </div>
   );
 };
 
