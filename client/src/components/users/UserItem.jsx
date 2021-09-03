@@ -1,31 +1,31 @@
 import React, { useState } from "react";
+import { Card, Button } from "react-bootstrap";
 
 import FullUserModal from "../FullUserModal";
 
 const UserItem = ({ user }) => {
-  const [modalActive, setModalActive] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="col-3 mb-3">
-      <div className="card" style={{ width: "18rem" }}>
-        <div className="card-body">
-          <h5 className="card-title">{user.name}</h5>
-          <p className="card-text">E-mail: {user.email}</p>
-          <p className="card-text">Phone: {user.phone}</p>
-          <p className="card-text">Username: {user.username}</p>
-          <p className="card-text">Website: {user.website}</p>
-          <button
-            className="btn btn-primary"
-            onClick={() => setModalActive(true)}
-          >
-            Open full
-          </button>
-        </div>
-        <FullUserModal
-          active={modalActive}
-          setActive={setModalActive}
-          user={user}
-        ></FullUserModal>
-      </div>
+      <Card style={{ width: "18rem" }}>
+        <Card.Body>
+          <Card.Title>{user.name}</Card.Title>
+          <Card.Text>
+            <p> E-mail: {user.email}</p>
+            <p>Phone: {user.phone}</p>
+            <p> Username: {user.username}</p>
+            <p>Website: {user.website}</p>
+          </Card.Text>
+          <Button variant="primary" onClick={() => handleShow()}>
+            Go somewhere
+          </Button>
+        </Card.Body>
+        <FullUserModal show={show} onClose={handleClose} user={user} />
+      </Card>
     </div>
   );
 };

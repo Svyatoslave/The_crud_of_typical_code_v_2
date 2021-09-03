@@ -1,10 +1,12 @@
 import React from "react";
-import "./App.css";
-import { fetchAllUsers } from "./store/action/asyncAction";
+import { Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
+import { fetchAllUsers } from "./store/action/asyncAction";
 import UserList from "./components/users/userList";
 import Header from "./components/header";
+
+import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -13,14 +15,13 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <Container>
       <Header></Header>
 
       <main>
         <UserList></UserList>
       </main>
-      <footer></footer>
-    </div>
+    </Container>
   );
 };
 

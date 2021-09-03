@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Row } from "react-bootstrap";
 
 import UserItem from "./UserItem";
 
@@ -7,11 +8,11 @@ const UserList = () => {
   const users = useSelector((state) => state.users);
 
   return (
-    <div className=" row">
+    <Row className=" mx-auto">
       {users.map((user) => (
         <UserItem key={user.id} user={user}></UserItem>
       ))}
-    </div>
+    </Row>
   );
 };
 
