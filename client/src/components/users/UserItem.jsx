@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Col } from "react-bootstrap";
 
-import FullUserModal from "../FullUserModal";
+import FullUserModal from "./FullUserModal";
 
 const UserItem = ({ user }) => {
   const [show, setShow] = useState(false);
@@ -10,23 +10,23 @@ const UserItem = ({ user }) => {
   const handleShow = () => setShow(true);
 
   return (
-    <div className="col-3 mb-3">
-      <Card style={{ width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>{user.name}</Card.Title>
-          <Card.Text>
-            <p> E-mail: {user.email}</p>
-            <p>Phone: {user.phone}</p>
-            <p> Username: {user.username}</p>
-            <p>Website: {user.website}</p>
-          </Card.Text>
-          <Button variant="primary" onClick={() => handleShow()}>
-            Go somewhere
-          </Button>
-        </Card.Body>
-        <FullUserModal show={show} onClose={handleClose} user={user} />
-      </Card>
-    </div>
+    <>
+      <Col className=" mb-3">
+        <Card style={{ width: "18rem" }}>
+          <Card.Body>
+            <Card.Title>{user.name}</Card.Title>
+            <Card.Text>E-mail: {user.email}</Card.Text>
+            <Card.Text>Phone: {user.phone}</Card.Text>
+            <Card.Text>Username: {user.username}</Card.Text>
+            <Card.Text>Website: {user.website}</Card.Text>
+            <Button variant="primary" onClick={() => handleShow()}>
+              Go somewhere
+            </Button>
+          </Card.Body>
+        </Card>
+      </Col>
+      <FullUserModal show={show} user={user} onClose={handleClose} />
+    </>
   );
 };
 

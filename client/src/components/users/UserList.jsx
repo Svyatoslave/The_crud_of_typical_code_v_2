@@ -1,12 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Row } from "react-bootstrap";
 
 import UserItem from "./UserItem";
+import NoData from "../NoData";
 
-const UserList = () => {
-  const users = useSelector((state) => state.users);
-
+const UserList = ({ users }) => {
+  if (users.length === 0) {
+    return <NoData />;
+  }
   return (
     <Row className=" mx-auto">
       {users.map((user) => (
